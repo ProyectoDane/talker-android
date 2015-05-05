@@ -175,16 +175,17 @@ public class CalculatorResolve extends CalculatorExpression {
 		
 		if (getState().isSolved()) return;
 		String expression = getTextView().getText().toString();
-		
-		String[] input = this.expand(expression).split(" ");
-		Queue<String> output = infixToRPN(input);
-		try {
-			double result = resuelve(output);
-			DecimalFormat df = new DecimalFormat("#.##");
-			String aString = df.format(result);
-			getTextView().append(" = " + aString);
-		} catch (Exception e) {
-			getTextView().append(" = Error");
+		if (!expression.isEmpty()) {
+			String[] input = this.expand(expression).split(" ");
+			Queue<String> output = infixToRPN(input);
+			try {
+				double result = resuelve(output);
+				DecimalFormat df = new DecimalFormat("#.##");
+				String aString = df.format(result);
+				getTextView().append(" = " + aString);
+			} catch (Exception e) {
+				getTextView().append(" = Error");
+			}
 		}
 	}
 

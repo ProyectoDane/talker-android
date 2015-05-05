@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="horizontal" >
+
+    <ImageView
+        android:id="@+id/sceneActionBack"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:clickable="true"
+        android:contentDescription="@string/settings_back"
+        android:scaleType="fitXY"
+        android:src="@drawable/cancel_back" />
+
+    <ImageView
+        android:id="@+id/new_scene_delete_scenario_name"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:clickable="true"
+        android:contentDescription="@string/delete_scenario_title"
+        android:scaleType="fitXY"
+        android:src="@drawable/erase_all" />
+
+    <ImageView
+        android:id="@+id/new_scene_edit_scenario_name"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:clickable="true"
+        android:contentDescription="@string/change_conversation_title"
+        android:scaleType="fitXY"
+        android:src="@drawable/editname" />
+
+    <ImageView
+        android:id="@+id/new_scene_start"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="15dp"
+        android:clickable="true"
+        android:contentDescription="@string/new_scene_start"
+        android:enabled="false"
+        android:scaleType="fitXY"
+        android:src="@drawable/start" />
+    
+</LinearLayout>

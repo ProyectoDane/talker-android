@@ -14,6 +14,8 @@ public class CalculatorState {
 	private enum CalcStatus {
 		ANY_SIMBOL,
 		ONLY_NUMBER,
+		OPEN,
+		CLOSE,
 		ONLY_DECIMAL,
 		NO_DOT,
 		SOLVED
@@ -71,6 +73,8 @@ public class CalculatorState {
 	}
 
 	public void setOpen() {
+		states.add(CalcStatus.OPEN);
+		states.add(CalcStatus.ONLY_NUMBER);
 		sections++;
 	}
 
@@ -82,6 +86,8 @@ public class CalculatorState {
 
 
 	public void setClose() {
+		states.add(CalcStatus.CLOSE);
+		states.add(CalcStatus.ONLY_NUMBER);
 		sections--;
 	}
 
@@ -102,9 +108,17 @@ public class CalculatorState {
 	public void stateBack() {
 		if (!states.isEmpty()) {
 			states.pop();
+			if (CalcStatus.OPEN.equals(states.peek())) {
+				states.pop();
+				sections--;
+			}else if (CalcStatus.CLOSE.equals(states.peek())) {
+				states.pop();
+				sections++;
+			}
 		}
 		if (states.isEmpty()) {
 			this.clearStates();
+			sections = 0;
 		}
 	}
 }

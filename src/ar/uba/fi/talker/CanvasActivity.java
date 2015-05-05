@@ -39,6 +39,8 @@ import android.widget.Toast;
 import ar.uba.fi.talker.component.ComponentType;
 import ar.uba.fi.talker.component.Setting;
 import ar.uba.fi.talker.dao.ConversationTalkerDataSource;
+import ar.uba.fi.talker.dao.ScenarioDAO;
+import ar.uba.fi.talker.dao.ScenarioTalkerDataSource;
 import ar.uba.fi.talker.dao.SettingTalkerDataSource;
 import ar.uba.fi.talker.fragment.CalculatorFragment;
 import ar.uba.fi.talker.fragment.DatePickerFragment;
@@ -64,9 +66,10 @@ public class CanvasActivity extends ActionBarActivity implements
 
 	private Scenario scenario;
 	
-	private SettingTalkerDataSource datasource;
-
+	private SettingTalkerDataSource settingDatasource;
 	private ConversationTalkerDataSource datasourceConversation;
+	private ScenarioTalkerDataSource datasource;
+	
 	private static int RESULT_LOAD_IMAGE = 1;
 	
 	@Override
@@ -74,12 +77,12 @@ public class CanvasActivity extends ActionBarActivity implements
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.canvas_default);
-
-		//seteo de configuracion
-		datasource = new SettingTalkerDataSource(this);
-		datasource.open();
 		
-		Setting settings = datasource.getSettings();
+		//seteo de configuracion
+		settingDatasource = new SettingTalkerDataSource(this);
+		settingDatasource.open();
+		
+		Setting settings = settingDatasource.getSettings();
 		PaintManager.setSettings(settings);
 		
 		scenario = (Scenario) this.findViewById(R.id.gestureOverlayView1);
@@ -89,7 +92,22 @@ public class CanvasActivity extends ActionBarActivity implements
 		    Bitmap image = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
 		    
 		    scenario.setBackgroundImage(image);
-
+		} else if (getIntent().hasExtra("position")) {
+			int imageViewId = getIntent().getExtras().getInt("position");
+			datasource = new ScenarioTalkerDataSource(this.getApplicationContext());
+			datasource.open();
+			ScenarioDAO scenariodao = datasource.getScenarioByID(imageViewId);
+			datasource.close();
+			long imageDatasourceID = scenariodao.getIdCode();
+			byte[] bytes = null;
+			Bitmap image = null;
+			if (imageDatasourceID != 0){
+				bytes = ImageUtils.transformImage(getResources(), imageDatasourceID); 
+			    image = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+			} else {
+				image = ImageUtils.getImageBitmap(this, scenariodao.getPath());
+			}
+		    scenario.setBackgroundImage(image);
 		}
 
 		ImageButton pencilOp = (ImageButton) findViewById(R.id.pencilOption);

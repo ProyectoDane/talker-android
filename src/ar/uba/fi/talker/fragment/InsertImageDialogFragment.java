@@ -11,7 +11,6 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -28,8 +27,6 @@ import ar.uba.fi.talker.dao.ImageDAO;
 import ar.uba.fi.talker.dao.ImageTalkerDataSource;
 
 public class InsertImageDialogFragment extends TalkerDialogFragment {
-
-	private static int RESULT_LOAD_IMAGE = 1;
 
 	private ViewFlipper flipper;
 	
@@ -84,10 +81,8 @@ public class InsertImageDialogFragment extends TalkerDialogFragment {
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		// Use the Builder class for convenient dialog construction
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
-		LayoutInflater inflater = getActivity().getLayoutInflater();
-		View gridViewContainer = inflater.inflate(
-				R.layout.insert_image_gridview, null);
+		
+		View gridViewContainer = View.inflate(getActivity(), R.layout.insert_image_gridview, null);
 
 		this.flipper = (ViewFlipper) gridViewContainer
 				.findViewById(R.id.vfImages);

@@ -11,11 +11,16 @@ import ar.uba.fi.talker.R;
 public class DeleteScenarioConfirmationDialogFragment extends TalkerDialogFragment {
 
 	public interface DeleteScenarioDialogListener {
-		public void onDialogPositiveClickDeleteScenarioDialogListener(
-				DialogFragment dialog);
+		void onDialogPositiveClickDeleteScenarioDialogListener(
+				DialogFragment dialog, int position);
 	}
 
 	DeleteScenarioDialogListener listener;
+	private int position;
+
+	public DeleteScenarioConfirmationDialogFragment(int position) {
+		this.position = position;
+	}
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -38,7 +43,7 @@ public class DeleteScenarioConfirmationDialogFragment extends TalkerDialogFragme
 				.setPositiveButton(R.string.delete_scenario_accept,
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {
-								listener.onDialogPositiveClickDeleteScenarioDialogListener(DeleteScenarioConfirmationDialogFragment.this);
+								listener.onDialogPositiveClickDeleteScenarioDialogListener(DeleteScenarioConfirmationDialogFragment.this, position);
 								dialog.dismiss();
 							}
 						})

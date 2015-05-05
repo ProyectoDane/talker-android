@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,7 +21,7 @@ import ar.uba.fi.talker.utils.GridItems;
 
 public class GridAdapter extends BaseAdapter {
 
-	Context context;
+	ActionBarActivity context;
 	
 	public class ViewHolder {
 		public ImageView imageView;
@@ -34,7 +33,7 @@ public class GridAdapter extends BaseAdapter {
     private static int pos;
 	
 
-	public GridAdapter(Context context, List<GridConversationItems> gridItems) {
+	public GridAdapter(ActionBarActivity context, List<GridConversationItems> gridItems) {
 
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		this.context = context;
@@ -89,28 +88,25 @@ public class GridAdapter extends BaseAdapter {
 
 			@Override
 			public void onClick(View v) {
-				ImageButton startScenarioBttn = (ImageButton) ((ActionBarActivity) context)
-						.findViewById(R.id.new_scene_start);
-				startScenarioBttn.setEnabled(true);
-				startScenarioBttn.setVisibility(View.VISIBLE);
-				ImageButton editNameConversationBttn = (ImageButton) ((ActionBarActivity) context)
-						.findViewById(R.id.new_scene_edit_scenario_name);
-				editNameConversationBttn.setEnabled(true);
-				editNameConversationBttn.setVisibility(View.VISIBLE);
-				ImageButton deleteConversationBttn = (ImageButton) ((ActionBarActivity) context)
-						.findViewById(R.id.new_scene_delete_scenario_name);
-				deleteConversationBttn.setVisibility(View.VISIBLE);
 				for (int i = 0; i < parent.getChildCount(); i++) {
 					parent.getChildAt(i).setBackgroundColor(Color.WHITE);	
 				}
 				view.setBackgroundColor(Color.CYAN);
 				itemSelectedId = getItemId(position);
 				pos = position;
+				
+				// TODO Comentado para solucionar primero GridSceneAdapter, 
+				// una vez funcionando hago funcionar esto.
+				
+//				SceneActionFragment fragment = new SceneActionFragment(position);
+//				fragment.onAttach(context);
+//				fragment.show(context.getSupportFragmentManager(), "action-scene");
 			}
 		});
 
 		GridConversationItems gridItems = items.get(position);
 		this.setCatImage(viewHolder, gridItems.getConversationDAO());
+		
 		return view;
 	}
 

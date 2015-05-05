@@ -18,13 +18,16 @@ public class ChangeNameDialogFragment extends TalkerDialogFragment {
 
 	public interface TextDialogListener {
 		public void onDialogPositiveClickTextDialogListener(
-				DialogFragment dialog);
-
+				DialogFragment dialog, int position);
 	}
 
 	TextDialogListener listener;
+	private int position;
 	
-	// Use this instance of the interface to deliver action events
+
+	public ChangeNameDialogFragment(int position) {
+		this.position = position;
+	}
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -52,7 +55,7 @@ public class ChangeNameDialogFragment extends TalkerDialogFragment {
 					KeyEvent event) {
 
 				if (actionId == EditorInfo.IME_ACTION_DONE) {
-					listener.onDialogPositiveClickTextDialogListener(ChangeNameDialogFragment.this);
+					listener.onDialogPositiveClickTextDialogListener(ChangeNameDialogFragment.this, position);
 					ChangeNameDialogFragment.this.dismiss();
 					return true;
 				}
@@ -64,7 +67,7 @@ public class ChangeNameDialogFragment extends TalkerDialogFragment {
 				.setPositiveButton(R.string.delete_conversation_accept,
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {
-								listener.onDialogPositiveClickTextDialogListener(ChangeNameDialogFragment.this);
+								listener.onDialogPositiveClickTextDialogListener(ChangeNameDialogFragment.this, position);
 								dialog.dismiss();
 							}
 						})

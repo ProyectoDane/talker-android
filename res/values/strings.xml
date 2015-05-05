@@ -54,6 +54,7 @@
 
     <!-- pantalla elegir escenario -->
     <string name="title_activity_new_scene">SELECCIONE UN ESCENARIO</string>
+    <string name="new_scene">NUEVA ESCENA</string>
     <string name="new_scene_start">EMPEZAR</string>
     <string name="new_scene_inner">INTERIOR</string>
     <string name="new_scene_exit">SALIR</string>
