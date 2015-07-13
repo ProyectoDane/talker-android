@@ -9,11 +9,17 @@ import android.widget.ImageView;
 
 public class ScreenSlidePageFragment extends Fragment {
 
-	private final Integer position;
+	private static final String POSITION = "position";
 
-	public ScreenSlidePageFragment(Integer position) {
-		this.position = position;
+	public ScreenSlidePageFragment() {
+	}
 
+	public static final ScreenSlidePageFragment newInstance(Integer position) {
+		ScreenSlidePageFragment f = new ScreenSlidePageFragment();
+		Bundle bdl = new Bundle(1);
+		bdl.putInt(POSITION, position);
+		f.setArguments(bdl);
+		return f;
 	}
 
 	@Override
@@ -21,7 +27,7 @@ public class ScreenSlidePageFragment extends Fragment {
 		ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.manner_of_use_slide_page, container, false);
 		ImageView view = (ImageView) rootView.findViewById(R.id.mannerOfUseSlide);
 
-		switch (position) {
+		switch (getArguments().getInt(POSITION)) {
 		case 0:
 			view.setImageResource(R.drawable.manner_of_use_5_history_action);
 			break;
@@ -40,7 +46,6 @@ public class ScreenSlidePageFragment extends Fragment {
 		default:
 			break;
 		}
-
 		return rootView;
 	}
 }
