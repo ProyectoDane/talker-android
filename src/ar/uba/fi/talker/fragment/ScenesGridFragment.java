@@ -20,7 +20,6 @@ public class ScenesGridFragment extends Fragment {
 
 	private GridView mGridView;
 	List<GridItems> gridItems;
-	private Activity activity;
 	private TalkerDataSource dao;
 
 	public ScenesGridFragment() {
@@ -29,7 +28,6 @@ public class ScenesGridFragment extends Fragment {
 
 	public void init(List<GridItems> gridItems, Activity activity, TalkerDataSource dao) {
 		this.gridItems = gridItems;
-		this.activity = activity;
 		this.dao = dao;
 	}
 	
@@ -45,8 +43,8 @@ public class ScenesGridFragment extends Fragment {
 	}
 
 	private int calculateColumns(View view) {
-		float scenarioWidth = activity.getResources().getDimension(R.dimen.scenarioWidth);
-		DisplayMetrics displayMetrics = activity.getResources().getDisplayMetrics();
+		float scenarioWidth = getActivity().getResources().getDimension(R.dimen.scenarioWidth);
+		DisplayMetrics displayMetrics = getActivity().getResources().getDisplayMetrics();
 		
 		return Math.round(displayMetrics.widthPixels /scenarioWidth);
 	}
@@ -55,9 +53,9 @@ public class ScenesGridFragment extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
-		if (activity != null) {
+		if (getActivity() != null) {
 
-			GridScenesAdapter mGridAdapter = new GridScenesAdapter(activity, gridItems);
+			GridScenesAdapter mGridAdapter = new GridScenesAdapter(getActivity(), gridItems);
 			mGridAdapter.setDao(dao);
 			if (mGridView != null) {
 				mGridView.setAdapter(mGridAdapter);

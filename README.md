@@ -5,9 +5,9 @@ Aplicación para teléfonos y tablets con Android OS, orientada a personas con A
 
 ## Desarrollo
 
-Este proyecto está construído en Eclipse IDE, con lo cual tendrá la jerarquía de carpetas de acuerdo al proyecto de Eclipse. Es posible importarlo en [Android Studio](https://developer.android.com/sdk/index.html).
+Este proyecto está construído en Eclipse IDE, con lo cual tendrá la jerarquía de carpetas de acuerdo al proyecto de Eclipse. Es posible importarlo en [Android Studio](https://developer.android.com/sdk/index.html). Próximamente disponible con gradle.
 
-Mínima target versión de Android: 14 (Android Ice Cream Sandwich)
+Mínima versión de Android soportada: 14 (Android Ice Cream Sandwich)
 
 ### Arquitectura
 TODO
@@ -31,6 +31,8 @@ TODO
 	
 ## Contribuciones
 
-Se utilizó [TextRect](https://gist.github.com/markusfisch/2655909) de [markusfisch](https://gist.github.com/markusfisch/) para dibujar etiquetas en elementos.
+Íconos de [Icofinder](https://www.iconfinder.com/iconsets/small-n-flat).
 
-Se utilizó para pruebas el [NewQuickAction](https://github.com/lorensiuswlt/NewQuickAction) de [lorensiuswlt](https://github.com/lorensiuswlt), aunque no fue incluído en el trabajo final.
+[TextRect](https://gist.github.com/markusfisch/2655909) de [markusfisch](https://gist.github.com/markusfisch/) para dibujar etiquetas en elementos.
+
+Para pruebas, el [NewQuickAction](https://github.com/lorensiuswlt/NewQuickAction) de [lorensiuswlt](https://github.com/lorensiuswlt), aunque no fue incluído en el trabajo final.
