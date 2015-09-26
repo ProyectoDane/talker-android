@@ -32,3 +32,6 @@ proguard/
 
 .settings/
 
+.gradle/
+build/
+app/build/
