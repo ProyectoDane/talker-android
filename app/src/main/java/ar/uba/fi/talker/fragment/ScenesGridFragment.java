@@ -26,7 +26,7 @@ public class ScenesGridFragment extends Fragment {
 		this.gridItems = new ArrayList<GridItems>();
 	}
 
-	public void init(List<GridItems> gridItems, Activity activity, TalkerDataSource dao) {
+	public void init(List<GridItems> gridItems, TalkerDataSource dao) {
 		this.gridItems = gridItems;
 		this.dao = dao;
 	}
@@ -45,10 +45,10 @@ public class ScenesGridFragment extends Fragment {
 	private int calculateColumns(View view) {
 		float scenarioWidth = getActivity().getResources().getDimension(R.dimen.scenarioWidth);
 		DisplayMetrics displayMetrics = getActivity().getResources().getDisplayMetrics();
-		
+
 		return Math.round(displayMetrics.widthPixels /scenarioWidth);
 	}
-	
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -63,10 +63,6 @@ public class ScenesGridFragment extends Fragment {
 		}
 	}
 
-	public GridView getmGridView() {
-		return mGridView;
-	}
-	
 	public List<GridItems> getGridItems() {
 		return gridItems;
 	}

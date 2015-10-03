@@ -208,5 +208,6 @@
 	<string name="nombre">NOMBRE</string>
 	<string name="address">DIRECCIÓN</string>
 	<string name="phone">TELÉFONO</string>
-    
+    <string name="new_image_button">new image button</string>
+
 </resources>

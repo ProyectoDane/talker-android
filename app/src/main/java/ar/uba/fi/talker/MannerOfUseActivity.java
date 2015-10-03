@@ -11,11 +11,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 
-import com.viewpagerindicator.PageIndicator;
 
 public class MannerOfUseActivity extends ActionBarActivity {
 
-	public PageIndicator pageIndicator;
 	private static final int NUM_PAGES = 5;
 
 	/**
@@ -32,13 +30,11 @@ public class MannerOfUseActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout_manner_of_use_container);
-		pageIndicator = (PageIndicator) findViewById(R.id.pagerIndicator);
 
 		// Instantiate a ViewPager and a PagerAdapter.
 		mPager = (ViewPager) findViewById(R.id.pager);
 		mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
 		mPager.setAdapter(mPagerAdapter);
-		pageIndicator.setViewPager(mPager);
 
 		ImageButton backBttn = (ImageButton) findViewById(R.id.useSceneActionBack);
 		backBttn.setOnClickListener(new OnClickListener() {

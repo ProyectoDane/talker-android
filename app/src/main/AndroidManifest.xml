@@ -4,12 +4,7 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="16" />
-
     <uses-permission android:name="android.permission.BATTERY_STATS" />
-    <uses-permission android:name="android.permission.PERSISTENT_ACTIVITY" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -46,10 +41,6 @@
             android:screenOrientation="landscape" >
         </activity>
         <activity
-            android:name=".TalkerAndroidDataBase"
-            android:screenOrientation="landscape" >
-        </activity>
-        <activity
             android:name=".MyPreferenceActivity"
             android:icon="@drawable/app_icon"
             android:label="@string/title_activity_settings"
@@ -78,7 +69,6 @@
             android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name=".activities.NewCategoryContactActivity" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

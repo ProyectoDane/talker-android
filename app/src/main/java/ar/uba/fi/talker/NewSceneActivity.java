@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 import ar.uba.fi.talker.adapter.PagerScenesAdapter;
+import ar.uba.fi.talker.component.indicator.PageIndicator;
 import ar.uba.fi.talker.dao.ScenarioDAO;
 import ar.uba.fi.talker.dataSource.ScenarioTalkerDataSource;
 import ar.uba.fi.talker.dto.TalkerDTO;
@@ -29,25 +30,19 @@ import ar.uba.fi.talker.utils.GridUtils;
 import ar.uba.fi.talker.utils.ImageUtils;
 import ar.uba.fi.talker.utils.ResultConstant;
 
-import com.viewpagerindicator.PageIndicator;
-
 public class NewSceneActivity extends ActionBarActivity implements DeleteResourceDialogListener {
 
-	// Use this instance of the interface to deliver action events
-	private PageIndicator pageIndicator;
-	private ViewPager viewPager;
-	private PagerScenesAdapter pagerAdapter;
-	private ScenarioTalkerDataSource datasource;
+	private ScenarioTalkerDataSource dataSource;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
 		final NewSceneActivity self = this;
-		setContentView(R.layout.layout_ext_scenes);
+		setContentView(R.layout.layout_images);
 
 		scenesPagerSetting();
-		ImageButton galleryScenarioBttn = (ImageButton) this.findViewById(R.id.new_scene_gallery);
+		ImageButton galleryScenarioBttn = (ImageButton) this.findViewById(R.id.new_image_button);
 		galleryScenarioBttn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -64,16 +59,16 @@ public class NewSceneActivity extends ActionBarActivity implements DeleteResourc
 	}
 
 	private void scenesPagerSetting() {
-		viewPager = (ViewPager) this.findViewById(R.id.pager);
-		pageIndicator = (PageIndicator) this.findViewById(R.id.pagerIndicator);
+		ViewPager viewPager = (ViewPager) this.findViewById(R.id.pager);
+		PageIndicator pageIndicator = (PageIndicator) this.findViewById(R.id.pagerIndicator);
 
-		if (datasource == null ) {
-			datasource = new ScenarioTalkerDataSource(this.getApplicationContext());
+		if (dataSource == null ) {
+			dataSource = new ScenarioTalkerDataSource(this.getApplicationContext());
 		}
-		List<TalkerDTO> allImages = datasource.getAll();
-		List<ScenesGridFragment> gridFragments = GridUtils.setScenesGridFragments(this, allImages, datasource);
+		List<TalkerDTO> allImages = dataSource.getAll();
+		List<ScenesGridFragment> gridFragments = GridUtils.setScenesGridFragments(this, allImages, dataSource);
 
-		pagerAdapter = new PagerScenesAdapter(this.getSupportFragmentManager(), gridFragments);
+		PagerScenesAdapter pagerAdapter = new PagerScenesAdapter(this.getSupportFragmentManager(), gridFragments);
 		viewPager.setAdapter(pagerAdapter);
 		pageIndicator.setViewPager(viewPager);
 	}
@@ -102,7 +97,7 @@ public class NewSceneActivity extends ActionBarActivity implements DeleteResourc
 			
 			Intent intent = new Intent(this.getApplicationContext(), CanvasActivity.class);
 			if (bitmap != null) {
-				scenarioName = "SCENARIO_" + String.valueOf(datasource.getLastId() + 1);
+				scenarioName = "SCENARIO_" + String.valueOf(dataSource.getLastId() + 1);
 				new ImageSaverTask(this.getApplicationContext(), scenarioName, orientation).execute(bitmap);
 				bytes = ImageUtils.transformImage(bitmap);
 				Bundle extras = new Bundle();
@@ -135,7 +130,7 @@ public class NewSceneActivity extends ActionBarActivity implements DeleteResourc
 			scenario.setName(name);
 			scenario.setPath(file.getPath());
 			
-			datasource.add(scenario);
+			dataSource.add(scenario);
 			return null;
 		}
 		
@@ -149,7 +144,7 @@ public class NewSceneActivity extends ActionBarActivity implements DeleteResourc
 			deleted = file.delete();
 		}
 		if (deleted){
-			datasource.delete(scenarioView.getId());
+			dataSource.delete(scenarioView.getId());
 		} else {
 			Toast.makeText(this, "Ocurrio un error con la imagen.",	Toast.LENGTH_SHORT).show();
 			Log.e("NewScene", "Unexpected error deleting imagen.");

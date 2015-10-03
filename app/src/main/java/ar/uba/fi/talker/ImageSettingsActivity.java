@@ -22,6 +22,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 import ar.uba.fi.talker.adapter.GridScenesAdapter;
 import ar.uba.fi.talker.adapter.PagerScenesAdapter;
+import ar.uba.fi.talker.component.indicator.PageIndicator;
 import ar.uba.fi.talker.dao.ImageDAO;
 import ar.uba.fi.talker.dataSource.ContactTalkerDataSource;
 import ar.uba.fi.talker.dataSource.ImageTalkerDataSource;
@@ -32,8 +33,6 @@ import ar.uba.fi.talker.fragment.ScenesGridFragment;
 import ar.uba.fi.talker.utils.GridItems;
 import ar.uba.fi.talker.utils.GridUtils;
 import ar.uba.fi.talker.utils.ImageUtils;
-
-import com.viewpagerindicator.PageIndicator;
 
 public class ImageSettingsActivity extends CommonImageSettingsActiviy implements DialogInterface.OnDismissListener {
 
@@ -62,9 +61,9 @@ public class ImageSettingsActivity extends CommonImageSettingsActiviy implements
 		setContentView(R.layout.layout_images);
 		viewPager = (ViewPager) this.findViewById(R.id.pager);
 		pageIndicator = (PageIndicator) this.findViewById(R.id.pagerIndicator);
-		
+
 		this.imagesPagerSetting();
-		ImageButton createImageBttn = (ImageButton) this.findViewById(R.id.new_image_gallery);
+		ImageButton createImageBttn = (ImageButton) this.findViewById(R.id.new_image_button);
 		if (isContact){
 			createImageBttn.setOnClickListener(new View.OnClickListener() {
 				@Override

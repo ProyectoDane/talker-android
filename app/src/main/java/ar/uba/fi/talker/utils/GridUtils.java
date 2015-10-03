@@ -28,25 +28,25 @@ public final class GridUtils {
 				itmLst.add(new GridItems(i, it.next()));
 			}
 			ScenesGridFragment fragment = new ScenesGridFragment();
-			fragment.init(itmLst, activity, dao);
+			fragment.init(itmLst, dao);
 			gridFragments.add(fragment);
 		}
 		return gridFragments;
 	}
 
 	private static int calculateImagesPerPage(Activity activity) {
-		
+
 		float scenarioWidth = activity.getResources().getDimension(R.dimen.scenarioWidth);
 		float scenarioHeight = activity.getResources().getDimension(R.dimen.scenarioHeight);
-		
+
 		DisplayMetrics displayMetrics = activity.getResources().getDisplayMetrics();
 
         float dpHeight = displayMetrics.heightPixels;
         float dpWidth = displayMetrics.widthPixels;
-		
+
 		float maxImagesFloat =  Math.round(dpHeight/scenarioHeight) *  Math.round(dpWidth /scenarioWidth);
 		int maxImages = Math.round(maxImagesFloat);
-		
+
 		if (maxImages < 1 ){
 			maxImages = 1;
 		}

@@ -17,7 +17,7 @@
         android:layout_alignRight="@+id/pagerIndicator"
         android:padding="20dp" />
 
-    <com.viewpagerindicator.CirclePageIndicator
+    <ar.uba.fi.talker.view.CirclePageIndicator
         android:id="@+id/pagerIndicator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

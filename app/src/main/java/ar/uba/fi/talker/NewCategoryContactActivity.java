@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 import ar.uba.fi.talker.adapter.PagerScenesAdapter;
+import ar.uba.fi.talker.component.indicator.PageIndicator;
 import ar.uba.fi.talker.dao.CategoryDAO;
 import ar.uba.fi.talker.dao.ImageDAO;
 import ar.uba.fi.talker.dataSource.CategoryTalkerDataSource;
@@ -22,19 +23,15 @@ import ar.uba.fi.talker.fragment.ScenesGridFragment;
 import ar.uba.fi.talker.fragment.TextDialogFragment;
 import ar.uba.fi.talker.utils.GridUtils;
 
-import com.viewpagerindicator.PageIndicator;
-
 public class NewCategoryContactActivity extends CommonImageSettingsActiviy {
 
-	 	private final CategoryTalkerDataSource categoryDatasource;
-		private final ImageTalkerDataSource imageDatasource;
-		// private final ContactTalkerDataSource contactDatasource;
-		
-		public PageIndicator pageIndicator;
-		private ViewPager viewPager;
-		private PagerScenesAdapter pagerAdapter;
-		
-		public NewCategoryContactActivity() {
+	private final CategoryTalkerDataSource categoryDatasource;
+	private final ImageTalkerDataSource imageDatasource;
+	// private final ContactTalkerDataSource contactDatasource;
+
+	public PageIndicator pageIndicator;
+
+	public NewCategoryContactActivity() {
 			super();
 			categoryDatasource = new CategoryTalkerDataSource(this);
 			imageDatasource = new ImageTalkerDataSource(this);
@@ -44,9 +41,9 @@ public class NewCategoryContactActivity extends CommonImageSettingsActiviy {
 		@Override
 		protected void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
-			setContentView(R.layout.layout_categories);
+			setContentView(R.layout.layout_images);
 			categoriesPagerSetting();
-			ImageButton createCategoryBttn = (ImageButton) this.findViewById(R.id.add_image);
+			ImageButton createCategoryBttn = (ImageButton) this.findViewById(R.id.new_image_button);
 			createCategoryBttn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -58,9 +55,9 @@ public class NewCategoryContactActivity extends CommonImageSettingsActiviy {
 		}
 
 		private void categoriesPagerSetting() {
-			viewPager = (ViewPager) this.findViewById(R.id.pager);
+			ViewPager viewPager = (ViewPager) this.findViewById(R.id.pager);
 			pageIndicator = (PageIndicator) this.findViewById(R.id.pagerIndicator);
-			
+
 			List<CategoryDAO> allImages = categoryDatasource.getAllContacts();
 			for (CategoryDAO categoryDAO : allImages) {
 				if (categoryDAO.getImage() != null) {
@@ -71,7 +68,7 @@ public class NewCategoryContactActivity extends CommonImageSettingsActiviy {
 			}
 			List<ScenesGridFragment> gridFragments = GridUtils.setScenesGridFragments(this, allImages, categoryDatasource);
 
-			pagerAdapter = new PagerScenesAdapter(getSupportFragmentManager(), gridFragments);
+			PagerScenesAdapter pagerAdapter = new PagerScenesAdapter(getSupportFragmentManager(), gridFragments);
 			viewPager.setAdapter(pagerAdapter);
 			pageIndicator.setViewPager(viewPager);
 		}
