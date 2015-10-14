@@ -84,5 +84,5 @@ public abstract class DragComponent extends Component {
 		this.invalidate();
 		return this.performClick();
 	}
-	
+
 }

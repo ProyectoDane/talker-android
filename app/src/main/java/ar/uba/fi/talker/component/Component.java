@@ -9,7 +9,7 @@ import android.os.Parcelable;
 import android.view.MotionEvent;
 import android.view.View;
 
-public abstract class Component extends View implements Parcelable {
+public abstract class Component extends View {
 
 	private boolean active = true;
 	private Rect bounds;
@@ -19,10 +19,6 @@ public abstract class Component extends View implements Parcelable {
 		bounds = new Rect();
 	}
 	
-	public Component(Parcelable source) {
-		super(null);
-	}
-
 	@Override
 	public boolean dispatchTouchEvent(MotionEvent event) {
 		return active && super.dispatchTouchEvent(event);
@@ -71,13 +67,11 @@ public abstract class Component extends View implements Parcelable {
 		super.onRestoreInstanceState(state);
 	}
 
-	@Override
-	public int describeContents() {
-		return 0;
+	public Parcelable getParcelable() {
+		return this.onSaveInstanceState();
 	}
 
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeParcelable(this.onSaveInstanceState(), flags);
+	public void restoreFromParcelable(Parcelable data) {
+		this.onRestoreInstanceState(data);
 	}
 }

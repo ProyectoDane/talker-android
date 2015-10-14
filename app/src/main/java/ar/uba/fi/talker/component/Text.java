@@ -34,7 +34,7 @@ public class Text extends DragComponent {
 	protected void onRestoreInstanceState(Parcelable state) {
 		 if (state instanceof Bundle) {
 			Bundle bundle = (Bundle) state;
-		    value = bundle.getString("value");
+		    value = bundle.getString("label");
 			
 			state = bundle.getParcelable("instanceState");
 		}

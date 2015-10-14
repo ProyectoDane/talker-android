@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.Editable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.FrameLayout;
 import ar.uba.fi.talker.component.Component;
@@ -33,6 +34,7 @@ import ar.uba.fi.talker.utils.BackgroundUtil;
 
 public class Scenario extends FrameLayout {
 
+	private static final String CHILD_TYPE = "Child_Type_";
 	private static final String CHILD_LABEL = "Child_";
 
 	private ComponentType activeComponentType;
@@ -81,7 +83,8 @@ public class Scenario extends FrameLayout {
 				Component child = (Component) this.getChildAt(0);
 				this.removeView(child);
 				if (child.getVisibility() == VISIBLE) {
-					bundle.putParcelable(CHILD_LABEL + realChildCount, child);
+					bundle.putString(CHILD_TYPE + realChildCount, child.getClass().getName());
+					bundle.putParcelable(CHILD_LABEL + realChildCount, child.getParcelable());
 					realChildCount++;
 				}
 			}
@@ -97,11 +100,22 @@ public class Scenario extends FrameLayout {
 			Bundle bundle = (Bundle) state;
 			int childCount = bundle.getInt("childCount");
 			for (int index = 0; index < childCount; index++) {
-				Component child = bundle.getParcelable(CHILD_LABEL + index);
-				if (child instanceof DragComponent) {
-					draggableComponents.add(child);
-				}
-				this.addView(child);
+				String name = bundle.getString(CHILD_TYPE + index);
+				Parcelable data = bundle.getParcelable(CHILD_LABEL + index);
+                try {
+                    Class<Component> classComponent = (Class<Component>) Class.forName(name);
+                    Component child = ComponentFactory.createComponentByName(
+                            classComponent, getContext());
+                    if (child != null) {
+                        child.restoreFromParcelable(data);
+                        if (child instanceof DragComponent) {
+                            draggableComponents.add(child);
+                        }
+                        this.addView(child);
+                    }
+                } catch (ClassNotFoundException e) {
+                    Log.e("SCENARIO", "invalid type", e);
+                }
 			}
 			state = bundle.getParcelable("instanceState");
 		}
@@ -110,7 +124,7 @@ public class Scenario extends FrameLayout {
 
 	@Override
 	public boolean performClick() {
-		return super.performClick() || true;
+		return true;
 	}
 
 	@Override

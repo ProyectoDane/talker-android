@@ -28,7 +28,7 @@ public class PencilStroke extends Component {
 	@Override
 	protected Parcelable onSaveInstanceState() {
 		Bundle bundle = new Bundle();
-	    bundle.putParcelable("instanceState", super.onSaveInstanceState());
+		bundle.putParcelable("instanceState", super.onSaveInstanceState());
 		bundle.putParcelableArrayList("points", this.points);
 		return bundle;
 	}
@@ -38,7 +38,7 @@ public class PencilStroke extends Component {
 
 		 if (state instanceof Bundle) {
 			Bundle bundle = (Bundle) state;
-			this.points = bundle.getParcelableArrayList("points");
+             this.points = bundle.getParcelableArrayList("points");
 
 			state = bundle.getParcelable("instanceState");
 		}
@@ -95,35 +95,6 @@ public class PencilStroke extends Component {
 		
 		this.invalidate();
 		return this.performClick();
-	}
-
-	public class PencilPoint extends Point {
-		public boolean initial = false;
-		public boolean end = false;
-		
-		public PencilPoint() {
-			super();
-		}
-		
-		public PencilPoint(Parcel source) {
-			super();
-			readFromParcel(source);
-		}
-
-		@Override
-		public void writeToParcel(Parcel out, int flags) {
-			super.writeToParcel(out, flags);
-			out.writeBooleanArray(new boolean[]{initial, end});
-		}
-		
-		@Override
-		public void readFromParcel(Parcel in) {
-			super.readFromParcel(in);
-			boolean[] temp = new boolean[2];
-		    in.readBooleanArray(temp);
-		    initial = temp[0];
-		    end = temp[1];
-		}
 	}
 
 }
